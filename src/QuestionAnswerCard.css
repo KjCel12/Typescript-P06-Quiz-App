@@ -3,6 +3,7 @@
     align-items: center;
     flex-direction: column;
     margin-top: 40px;
+    perspective: 1000px;
 }
 
 .cards-header {
@@ -28,6 +29,28 @@
     gap: 10px;
     padding: 20px;
     border: 1px solid #cccbcb;
+
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease, background-color 0s ease 0.2s;
+    cursor: pointer;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+  background-color: #6558d3;
+}
+
+.sub-label,
+.question,
+.inside-card-instruction {
+  transition: transform 0s ease, color 0s ease 0.2s;
+}
+
+.card.flipped .sub-label,
+.card.flipped .question,
+.card.flipped .inside-card-instruction {
+  transform: rotateY(180deg);
+  color: #ffffff;
 }
 
 .question {
@@ -56,6 +79,7 @@
     width: 200px;
     padding: 15px 25px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -63,3 +87,8 @@
     transform: scaleX(1.05);
 }
 
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccc; /* Optional gray out */
+}

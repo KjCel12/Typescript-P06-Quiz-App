@@ -12,11 +12,13 @@ export function QuestionAnswerForm({onAddCard}: QuestionAnswerFormProps) {
     const [answer, setAnswer] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
+
         e.preventDefault();
 
-        if(!question.trim() || !answer.trim()) return;
+        if(!question.trim() || !answer.trim()) return; 
 
         const newCard: Card = {
+            isInitialValue: false,
             id: Date.now(),
             question,
             answer,
@@ -33,7 +35,7 @@ export function QuestionAnswerForm({onAddCard}: QuestionAnswerFormProps) {
             <div className="form-group">
                 <h3 className="form-title">Add a new card</h3>
                 <p className="form-instruction">Write a question and answer, then add it to your deck</p>
-                <form >
+                <form onSubmit={handleSubmit}>
                     <div className="form-input">
                         <label className="input-label" htmlFor="question">Question</label>
                         <textarea 
@@ -41,8 +43,8 @@ export function QuestionAnswerForm({onAddCard}: QuestionAnswerFormProps) {
                         rows={3}
                         value={question}
                         onChange={(e) => setQuestion(e.target.value)}
+                        placeholder="Enter question..."
                         >
-
                         </textarea>
                     </div>
                     <div className="form-input">
@@ -52,10 +54,11 @@ export function QuestionAnswerForm({onAddCard}: QuestionAnswerFormProps) {
                         rows={3}
                         value={answer}
                         onChange={(e) => setAnswer(e.target.value)}
+                        placeholder="Enter answer..."
                         >
                         </textarea>
                     </div>
-                    <button className="add-btn btn" onClick={handleSubmit}>Add card</button>
+                    <button className="add-btn btn" type="submit">Add card</button>
                 </form>
             </div>
         </div>
